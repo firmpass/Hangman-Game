@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Hangman-Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="/Users/ericthornton/gt/Hangman-Game/assets/css/style.css">
+    <script src="https://code.jquery.com/jquery.js"></script>
+</head>
+<body>
+
+<div class="container">
+            <div class="jumbotron">
+                <h1 style="text-align:center">Hangman in the ATL</h1>
+                <p style="text-align:center">Click Button to Start!!!</p>
+                <p style="text-align:center"><a class="btn btn-primary btn-lg" href="#" role="button" onclick="startGame()">Start</a></p>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                        <div class="panel panel-success">
+                          <div class="panel-heading">
+                            <h3 style="text-align:center" class="panel-title">Score</h3>
+                          </div>
+                          <div style="text-align:center" class="panel-body">
+                            <p>Wins: <span id="wins">0</span></p>
+                            <p>Loss: <span id="loss">0</span></p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                            <div class="panel panel-info">
+                              <div class="panel-heading">
+                                <h3 style="text-align:center" class="panel-title">Stats</h3>
+                              </div>
+                              <div style="text-align:center" class="panel-body">
+                                    <p>Letters Guessed: <span id="letter-guess"></span></p>
+                                    <p>Guesses Remaining: <span id="guess-remaining">10</span></p>
+                              </div>
+                            </div>
+                          </div>                
+                 </div>
+                 <div class="row">
+                        <div class="col-lg-12">
+                                <div style="text-align:center" class="panel panel-warning">
+                                  <div class="panel-heading">
+                                    <h3 class="panel-title">Remember one letter at a time, Guess the "WORD" below!!!</h3>
+                                  </div>
+                                  <div class="panel-body">
+                                    <p id="letter"><h3></h3></p>
+                                  </div>
+                                </div>
+                              </div>
+                 </div>
+
+                 <script type="text/javascript">
+                 
+                 //Here we define our array of ATL words, and randomize the word to guess.
+                 var randomWordArr = ["peachtree", "buckhead", "falcons", "hawks", "braves", "riverdale", "outkast", "morehouse"];
+                 
+                //empty array to store guesses.
+                 var guesses = [];
+                 var answersArr = [];
+                 var guessesleft = 10;
+                 var randomWord;
+                 var underScores = [];
+                 var wrongLetter = [];
+                 var wins = 0;
+                 var loss = 0;
+                 var winC = 0;
+                
+
+                
+                  //Function to resetGame
+                  // function resetGame(){
+                  //   wins =0;
+                  //   loss =0;
+                  //   runGuessSoFar();
+                  //   runGuessLeft();
+
+                  // }
+                  // var runGuessSoFar = function(){ document.querySelector("#letter-guess").innerHTML = guessLeft;
+                  // };
+
+                  // var runGuessLeft = function(){ document.querySelector("#letter").innerHTML = underScores.join(" ");
+                  // };
+
+                //Function to startGame
+                 function startGame(){
+                  var randomWord = randomWordArr[Math.floor(Math.random() * randomWordArr.length)];
+                  console.log(randomWord);
+                 
+                 for(var i = 0; i < randomWord.length; i++)
+                   {
+                      answersArr.push =("_");
+                   }
+                   {
+                      document.getElementById("letter").innerHTML = underScores.join(" ");
+
+                      //reset
+                      wrongLetter = [];
+                      guessesleft = 10;
+
+                      document.getElementById("guess-remaining").innerHTML = guessesleft;
+                 }
+
+                 function winLose()
+                 {
+                   if (winC === randomWord.length) {
+                     alert("WIN!");
+                     wins++;
+                     document.getElementById("wins").innerHTML = wins;
+                     startGame();
+                     
+                     
+                   }
+                   else if(guessesleft === 0)
+                   {
+                     alert("loser");
+                     loss++;
+                     document.getElementById("loss").innerHTML = loss;
+                     startGame();
+                     
+                   }
+                 }
+                   
+                   document.onkeyup = function(event)
+                   {
+                     userGuesses = event.key;
+                    
+
+                     if(randomWord.indexOf(userGuesses) > -1)
+                     {
+                       for(var i = 0; i < randomWord.length; i++)
+                       {
+                         if(randomWord[i] === userGuesses) 
+                         {
+                            underScores[i] = userGuesses;
+                            console.log(underScores);
+                            winC++;
+                            winLose();
+                         }
+                       }
+                      }
+                       else {
+                         wrongLetter.push(userGuesses);
+                         
+                         console.log(wrongLetter);
+                         //having problems decreasing
+                         guessesleft--;
+                         winLose();
+
+                       }
+                     }
+                 }
+                 //Create random word array
+                 //Create logic for random letter array
+                 //click listener for start button to restart app
+                 //update wins++ after hangword is guessed correctly
+                 //update loss++ after hangword guesses run out
+                 //push guessed letters to letters guessed area
+                 //guess-remaining starts with 10 and subtracts for every wrong guess.
+                 //create area for word, replace null. 
+
+                 startGame();
+                 
+                 </script>
+
+
+
+
+</div>
+    
+</body>
+</html>
