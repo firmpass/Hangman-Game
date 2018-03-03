@@ -4,13 +4,13 @@
 
 body {
     font-family: 'Montserrat', sans-serif;
-    background-image: url("/assets/images/atl1.jpg");
+    background-image: url("../images/atl1.jpg");
 
 }
 
 .jumbotron {
     margin-bottom: 0px;
-    background-image: url("/assets/images/atl2.jpg");
+    background-image: url("../images/atl2.jpg");
     background-position: 0% 25%;
     background-size: cover;
     background-repeat: no-repeat;
